@@ -10,7 +10,7 @@ public class Sum {
     }
 
     static int squaresum(int x, int y) {
-        return (x * x) + (y * y);
+        return x * x + y * y;
     }
 
     static void output(String content){
