@@ -29,7 +29,7 @@ public class Battleship {
     }
 
     static boolean onOneLine(final Coordinate start, final Coordinate end) {
-        if(start.column == end.column && start.row == end.row) {
+        if(start.column == end.column || start.row == end.row) {
            return true ;
         } else {
             return false;
