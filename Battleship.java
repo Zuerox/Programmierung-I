@@ -33,12 +33,8 @@ public class Battleship {
     }
 
     static int getMaxSurroundingColumn(final Coordinate start, final Coordinate end) {
-        int maxColumn;
-        if(start.column >= end.column) {
-            maxColumn = start.column;
-        }else {
-            maxColumn = end.column;
-        }
+        int maxColumn = Math.max(start.column, end.column);
+
         if (maxColumn == size) {
             return maxColumn - 1;
         }else {
@@ -47,12 +43,8 @@ public class Battleship {
     }
 
     static int getMinSurroundingColumn(final Coordinate start, final Coordinate end) {
-        int minColumn;
-        if(start.column <= end.column) {
-            minColumn = start.column;
-        }else {
-            minColumn = end.column;
-        }
+        int minColumn = Math.min(start.column, end.column);
+
         if (minColumn >= 1) {
             return minColumn - 1;
         }else {
@@ -61,12 +53,8 @@ public class Battleship {
     }
 
     static int getMaxSurroundingRow(final Coordinate start, final Coordinate end) {
-        int maxRow;
-        if(start.column >= end.column) {
-            maxRow = start.column;
-        }else {
-            maxRow = end.column;
-        }
+        int maxRow = Math.max(start.row, end.row);
+
         if (maxRow == size) {
             return maxRow - 1;
         }else {
@@ -75,12 +63,8 @@ public class Battleship {
     }
 
     static int getMinSurroundingRow(final Coordinate start, final Coordinate end) {
-        int minRow;
-        if(start.column <= end.column) {
-            minRow = start.column;
-        }else {
-            minRow = end.column;
-        }
+        int minRow = Math.min(start.row, end.row);
+
         if (minRow >= 1) {
             return minRow - 1;
         }else {
