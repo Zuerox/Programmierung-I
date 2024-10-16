@@ -1,4 +1,12 @@
 public class Battleship {
+    public static void main(String[] args) {
+        Coordinate eins = new Coordinate(9, 2);
+        Coordinate zwei = new Coordinate(9, 8);
+        int max = getMinSurroundingColumn(eins, zwei);
+
+        System.out.println(max);
+    }
+
     static final int size = 10;
 
     public enum Field {
@@ -35,10 +43,10 @@ public class Battleship {
     static int getMaxSurroundingColumn(final Coordinate start, final Coordinate end) {
         int maxColumn = Math.max(start.column, end.column);
 
-        if (maxColumn == size) {
-            return maxColumn - 1;
-        }else {
+        if (maxColumn == size - 1) {
             return maxColumn;
+        }else {
+            return maxColumn + 1;
         }
     }
 
@@ -55,10 +63,10 @@ public class Battleship {
     static int getMaxSurroundingRow(final Coordinate start, final Coordinate end) {
         int maxRow = Math.max(start.row, end.row);
 
-        if (maxRow == size) {
-            return maxRow - 1;
-        }else {
+        if (maxRow == size - 1) {
             return maxRow;
+        }else {
+            return maxRow + 1;
         }
     }
 
