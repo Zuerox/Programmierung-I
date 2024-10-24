@@ -1,22 +1,21 @@
 public class Battleship {
     public static void main(String[] args) {
-        Coordinate eins = new Coordinate(9, 2);
-        Coordinate zwei = new Coordinate(9, 8);
-        int max = getMinSurroundingColumn(eins, zwei);
-
-        System.out.println(max);
+        System.out.println(getRandomEndCoordinate(getRandomCoordinate(), 2));
     }
 
     static final int size = 10;
+
+    static final String ENTER_SHIP_COORDINATE_PROMT = "Geben Sie die %s für ein Schiff der Länge %d ein: ";
 
     public enum Field {
         FREE, SHIP, SHIP_HIT, WATER_HIT
     }
 
-    public record Coordinate (
-        int column,
-        int row
-    ) {}
+    public record Coordinate(
+            int column,
+            int row
+    ) {
+    }
 
     static int distance(final Coordinate start, final Coordinate end) {
         return Math.abs(start.row - end.row) + Math.abs(start.column - end.column);
@@ -32,7 +31,7 @@ public class Battleship {
         return start.column == end.column || start.row == end.row;
     }
 
-    static void showSeperatorLine(){
+    static void showSeperatorLine() {
         System.out.println("   +-+-+-+-+-+-+-+-+-+-+      +-+-+-+-+-+-+-+-+-+-+");
     }
 
@@ -41,7 +40,7 @@ public class Battleship {
 
         if (maxColumn == size - 1) {
             return maxColumn;
-        }else {
+        } else {
             return maxColumn + 1;
         }
     }
@@ -51,7 +50,7 @@ public class Battleship {
 
         if (minColumn >= 1) {
             return minColumn - 1;
-        }else {
+        } else {
             return minColumn;
         }
     }
@@ -61,7 +60,7 @@ public class Battleship {
 
         if (maxRow == size - 1) {
             return maxRow;
-        }else {
+        } else {
             return maxRow + 1;
         }
     }
@@ -71,10 +70,70 @@ public class Battleship {
 
         if (minRow >= 1) {
             return minRow - 1;
-        }else {
+        } else {
             return minRow;
         }
     }
-}
 
+    static Coordinate toCoordinate(final String input) {
+        int row = Integer.parseInt(input.substring(1)) - 1;
+        final String lowerInput = input.toLowerCase();
+        int column = Character.getNumericValue(lowerInput.charAt(0)) - 10;
+
+        return new Coordinate(column, row);
+    }
+
+    static boolean isValidCoordinate(final String input) {
+            return input.matches("[A-J a-j](10|[1-9])");
+        }
+
+    static String getStartCoordinatePrompt(final int length){
+        return String.format(ENTER_SHIP_COORDINATE_PROMT, "Startkoordinate", length);
+    }
+
+    static String getEndCoordinatePrompt(final int length){
+        return String.format(ENTER_SHIP_COORDINATE_PROMT, "Endkoordinate", length);
+    }
+
+    static void showRowNumber(final int row){
+        int rowNumber = row + 1;
+        if(rowNumber == 10){
+            System.out.print(rowNumber);
+        }else {
+            System.out.print(" " + rowNumber);
+        }
+    }
+
+    static Coordinate getRandomEndCoordinate(final Coordinate start, final int distance){
+        int columnOrRow = Utility.getRandomInt(2);
+        int addOrSubtract = Utility.getRandomInt(2);
+        Coordinate endCoordinate = new Coordinate(start.column, start.row);
+        if(columnOrRow == 0){
+            if(addOrSubtract == 0){
+                int column = start.column + distance;
+                if (column >= size){
+                    column = start.column - distance;
+                } endCoordinate = new Coordinate(column, start.row);
+            }else if(addOrSubtract == 1){
+                int row = start.row - distance;
+                if (row < 0){
+                    row = start.row + distance;
+                } endCoordinate = new Coordinate(start.column, row);
+            }
+        }else if(columnOrRow == 1){
+            if(addOrSubtract == 0){
+                int column = start.column + distance;
+                if (column >= size){
+                    column = start.column - distance;
+                } endCoordinate = new Coordinate(column, start.row);
+            }else if(addOrSubtract == 1){
+                int row = start.row - distance;
+                if (row < 0){
+                    row = start.row + distance;
+                } endCoordinate = new Coordinate(start.column, row);
+            }
+        }
+        return endCoordinate;
+    }
+}
 
