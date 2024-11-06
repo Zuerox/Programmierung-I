@@ -1,6 +1,8 @@
 public class Battleship {
     public static void main(String[] args) {
-        System.out.println(getRandomEndCoordinate(getRandomCoordinate(), 2));
+        Coordinate koordinate = getRandomCoordinate();
+        System.out.println(koordinate);
+        System.out.println(getRandomEndCoordinate(koordinate, 2));
     }
 
     static final int size = 10;
@@ -105,27 +107,27 @@ public class Battleship {
     }
 
     static Coordinate getRandomEndCoordinate(final Coordinate start, final int distance){
-        int columnOrRow = Utility.getRandomInt(2);
-        int addOrSubtract = Utility.getRandomInt(2);
+        int columnOrRow = Utility.getRandomInt(2); //entscheidet, ob mit der Reihe oder Zeile gerechnet wird
+        int addOrSubtract = Utility.getRandomInt(2); //entscheidet, ob addiert oder subtrahiert wird
         Coordinate endCoordinate = new Coordinate(start.column, start.row);
-        if(columnOrRow == 0){
-            if(addOrSubtract == 0){
+        if(columnOrRow == 0){ //es wird mit der Zeile gerechnet
+            if(addOrSubtract == 0){ //es wird addiert
                 int column = start.column + distance;
-                if (column >= size){
+                if (column >= size){ //es wird geprüft ob neue Koordinate innerhalb des Feldes liegt
                     column = start.column - distance;
                 } endCoordinate = new Coordinate(column, start.row);
             }else if(addOrSubtract == 1){
-                int row = start.row - distance;
-                if (row < 0){
-                    row = start.row + distance;
-                } endCoordinate = new Coordinate(start.column, row);
+                int column = start.column - distance;
+                if (column < 0){
+                    column = start.column + distance;
+                } endCoordinate = new Coordinate(column, start.row);
             }
         }else if(columnOrRow == 1){
             if(addOrSubtract == 0){
-                int column = start.column + distance;
-                if (column >= size){
-                    column = start.column - distance;
-                } endCoordinate = new Coordinate(column, start.row);
+                int row = start.row + distance;
+                if (row >= size){
+                    row = start.row - distance;
+                } endCoordinate = new Coordinate(start.column, row);
             }else if(addOrSubtract == 1){
                 int row = start.row - distance;
                 if (row < 0){
