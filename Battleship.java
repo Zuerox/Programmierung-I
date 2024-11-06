@@ -137,5 +137,26 @@ public class Battleship {
         }
         return endCoordinate;
     }
+
+    static void showField(final Field field, final boolean showships){
+        switch (field) {
+            case FREE:
+                System.out.print(" ");
+                break;
+            case WATER_HIT:
+                System.out.print("x");
+                break;
+            case SHIP:
+                if(showships){
+                    System.out.print("o");
+                }else{
+                    System.out.print(" ");
+                }
+                break;
+            case SHIP_HIT:
+                System.out.print("*");
+                break;
+        }
+    }
 }
 
