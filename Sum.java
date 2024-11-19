@@ -48,4 +48,14 @@ public class Sum {
             return "1,0";
         }
     }
+
+    static int max(final int[] array){
+        int groessteZahl = array[0];
+        for(int i=0;i<array.length;i++){
+            if (array[i] > groessteZahl){
+                groessteZahl = array[i];
+            }
+        }
+        return groessteZahl;
+    }
 }
