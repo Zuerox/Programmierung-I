@@ -49,13 +49,18 @@ public class Sum {
         }
     }
 
-    static int max(final int[] array){
-        int groessteZahl = array[0];
-        for(int i=0;i<array.length;i++){
-            if (array[i] > groessteZahl){
-                groessteZahl = array[i];
+    static int max(final int[] array) {
+        try {
+            int groessteZahl = array[0];
+            for (int i = 0; i < array.length; i++) {
+                if (array[i] > groessteZahl) {
+                    groessteZahl = array[i];
+                }
             }
+            return groessteZahl;
+        } catch (IllegalArgumentException e) {
+            System.out.println("leeres Array " + e);
         }
-        return groessteZahl;
+        return 0;
     }
 }
